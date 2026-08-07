@@ -11,17 +11,17 @@
   --muted: #6f7a73;
   --line: #d8cfba;
   --green-soft: #e4eadf;
-  /* 苔綠 moss：全站唯一合法的成功/在線綠（收斂自原先十种微差绿） */
+  /* 苔綠 moss：全站唯一合法的成功/在線綠（收斂自原先十種微差綠） */
   --moss-100: #e8efe4;
   --moss-200: #bccab6;
   --moss-400: #8fa38c;
   --moss-500: #5d8c69;
   --moss-700: #4f7054;
   --moss-800: #3f6549;
-  /* 金的深档：纸面上做文字必须用 gold-700（--gold 直接做小字对比不足） */
+  /* 金的深檔：紙面上做文字必須用 gold-700（--gold 直接做小字對比不足） */
   --gold-500: #b98b38;
   --gold-700: #8a672a;
-  /* 不随主题翻转的实色：墨青面板及其上的米白文字（夜场里这些面板仍保持墨青，形成层次） */
+  /* 不隨主題翻轉的實色：墨青面板及其上的米白文字（夜場裏這些面板仍保持墨青，形成層次） */
   --ink-solid: #20342f;
   --cream: #f4efe3;
   --shadow: 0 18px 50px rgba(32, 52, 47, 0.09);
@@ -187,7 +187,12 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(54, 92, 125,
 .dish-card--soldout { opacity: .62; }
 .dish-card--soldout::after { content: "SOLD OUT"; position: absolute; inset: 12px 12px auto auto; padding: 3px 7px; border-radius: 4px; background: var(--ink-solid); color: #fff; font-family: var(--mono); font-size: 9.5px; }
 .dish-card-mark { width: 72px; height: 72px; display: grid; place-items: center; border-radius: 50%; background: var(--paper-deep); color: var(--red); font-family: var(--serif); font-size: 26px; box-shadow: inset 0 0 0 7px var(--card), inset 0 0 0 8px var(--line); }
-.dish-card-copy > div { display: flex; align-items: start; justify-content: spa…3897 tokens truncated…ax-width: 640px; margin: 0; color: rgba(255,255,255,.64); font-size: 14px; line-height: 1.8; }
+.dish-card-copy > div { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+.dish-card h3 { margin: 1px 0 0; font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.dish-card b { flex: 0 0 auto; color: var(--red); font-family: var(…3756 tokens truncated…er; gap: 40px; padding: 55px 0; }
+.merchant-hero .section-kicker { color: var(--gold); }
+.merchant-hero h1 { max-width: 660px; margin: 14px 0 15px; font-family: var(--serif); font-size: clamp(35px, 5vw, 55px); font-weight: 500; line-height: 1.25; }
+.merchant-hero p { max-width: 640px; margin: 0; color: rgba(255,255,255,.64); font-size: 14px; line-height: 1.8; }
 .merchant-seal { width: 118px; height: 118px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 2px solid rgba(255,255,255,.6); border-radius: 50%; color: var(--gold); }
 .merchant-seal span { color: #fff; font-family: var(--serif); font-size: 16px; }
 .merchant-grid { display: grid; grid-template-columns: 1.22fr .78fr; align-items: start; gap: 24px; padding-top: 54px; padding-bottom: 100px; }
@@ -270,7 +275,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(54, 92, 125,
   .hero-search { height: 52px; }
   .hero-menu { width: calc(100% - 7px); }
   .hero-sign { right: 5px; top: -24px; font-size: 15px; padding: 12px 8px 10px; }
-  /* 右侧留出竖招牌的落位，避免盖住菜价 */
+  /* 右側留出豎招牌的落位，避免蓋住菜價 */
   .menu-paper { padding: 21px 46px 16px 18px; }
   .paper-row { grid-template-columns: 24px 1fr auto; gap: 8px; padding-block: 14px; }
   .paper-row strong { font-size: 13px; }
@@ -343,7 +348,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid rgba(54, 92, 125,
 .merchant-cta button { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; border: 1px solid var(--red-dark); border-radius: 12px; background: var(--red); color: #fff6e7; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 4px 4px 0 var(--red-dark); transition: transform .16s ease, box-shadow .16s ease; }
 .merchant-cta button:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--red-dark); }
 
-/* 新组件的响应式规则必须位于其基础规则之后（同优先级，后者胜出） */
+/* 新組件的響應式規則必須位於其基礎規則之後（同優先級，後者勝出） */
 @media (max-width: 900px) {
   .steps-grid { grid-template-columns: 1fr; gap: 24px; }
   .merchant-cta-inner { flex-direction: column; align-items: flex-start; gap: 28px; }
@@ -363,7 +368,7 @@ html { scrollbar-width: thin; scrollbar-color: #c9ab6e var(--paper-deep); }
 ::-webkit-scrollbar-thumb { background: #c9ab6e; border-radius: 999px; border: 2px solid var(--paper-deep); }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
-/* 印章式按钮：抬起阴影随按下位移收平，呼应整体的盖章／贴纸视觉语言 */
+/* 印章式按鈕：抬起陰影隨按下位移收平，呼應整體的蓋章／貼紙視覺語言 */
 .primary-button:active { transform: translate(2px, 2px); box-shadow: none; }
 .merchant-cta button:active { transform: translate(3px, 3px); box-shadow: none; }
 
@@ -375,18 +380,18 @@ html { scrollbar-width: thin; scrollbar-color: #c9ab6e var(--paper-deep); }
 .step-item:nth-child(1) { animation-delay: .05s; }
 .step-item:nth-child(2) { animation-delay: .16s; }
 .step-item:nth-child(3) { animation-delay: .27s; }
-/* .reveal 只是入场动效的包装层，撑满原本由 .shop-card 承担的网格行高 */
+/* .reveal 只是入場動效的包裝層，撐滿原本由 .shop-card 承擔的網格行高 */
 .shop-grid .reveal { height: 100%; }
 .shop-grid .reveal > .shop-card { height: 100%; }
 @media (prefers-reduced-motion: reduce) {
   .paper-row, .step-item, .reveal { animation: none; }
 }
 
-/* 空状态／载入态图标加一层软底，避免线框图标孤零零漂浮 */
+/* 空狀態／載入態圖標加一層軟底，避免線框圖標孤零零漂浮 */
 .empty-state svg, .shop-detail-state > svg, .admin-empty > svg { padding: 15px; box-sizing: content-box; border-radius: 50%; background: var(--paper-deep); color: var(--muted); }
 .empty-state.error-state svg { background: #f4ddd6; color: var(--red-dark); }
 
-/* 首页骨架屏：尺寸对齐真实 .shop-card，数据到达时不跳动 */
+/* 首頁骨架屏：尺寸對齊真實 .shop-card，數據到達時不跳動 */
 .shop-card--skeleton { pointer-events: none; }
 .skeleton-art { height: 192px; background: var(--paper-deep); }
 .skeleton-line { height: 12px; margin-top: 10px; border-radius: 4px; background: var(--paper-deep); }
@@ -394,11 +399,11 @@ html { scrollbar-width: thin; scrollbar-color: #c9ab6e var(--paper-deep); }
 .skeleton-art::after, .skeleton-line::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); transform: translateX(-100%); animation: shimmer 1.6s ease infinite; }
 @keyframes shimmer { 100% { transform: translateX(100%); } }
 
-/* ── 美化轮：角色色 / 霓虹息 / 换场 ─────────────────── */
-/* 霓虹息：glow 只给"活的东西"（在线圆点），每屏 ≤2 处 */
+/* ── 美化輪：角色色 / 霓虹息 / 換場 ─────────────────── */
+/* 霓虹息：glow 只給"活的東西"（在線圓點），每屏 ≤2 處 */
 @keyframes breathe { 0%, 100% { box-shadow: 0 0 0 4px rgba(93, 140, 105, .18); } 50% { box-shadow: 0 0 0 9px rgba(93, 140, 105, .04); } }
 .source-dot.live, .api-status.connected i, .ms-api-badge i.live, .admin-api i.live { animation: breathe 2.4s ease-in-out infinite; }
-/* 换场：视图切换 240ms 淡入（main 仅在路由切换时重挂载） */
+/* 換場：視圖切換 240ms 淡入（main 僅在路由切換時重掛載） */
 @keyframes viewfade { from { opacity: 0; } }
 .app-shell > main { animation: viewfade .24s ease; }
 /* 微交互 */
