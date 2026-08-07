@@ -1,5 +1,5 @@
-// 极简 HTTP 工具：JSON 响应（含 CORS）、请求体读取、multipart 字段提取。
-// 参考实现零依赖，只用 node:http 原语。
+// 極簡 HTTP 工具：JSON 響應（含 CORS）、請求體讀取、multipart 字段提取。
+// 參考實現零依賴，只用 node:http 原語。
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
@@ -18,7 +18,7 @@ export function preflight(res) {
   res.end();
 }
 
-const MAX_BODY = 12 * 1024 * 1024; // 契约限制上传 10MB，留余量
+const MAX_BODY = 12 * 1024 * 1024; // 契約限制上傳 10MB，留餘量
 
 export function readBody(req) {
   return new Promise((resolve, reject) => {
@@ -38,7 +38,7 @@ export function parseJson(buf) {
   try { return JSON.parse(buf.toString("utf8") || "{}"); } catch { return {}; }
 }
 
-// 只提取文本字段与文件名/大小；参考实现不解析文件内容（正式环境由 OCR/LLM 服务处理原档）。
+// 只提取文本字段與文件名/大小；參考實現不解析文件內容（正式環境由 OCR/LLM 服務處理原檔）。
 export function parseMultipart(buf) {
   const text = buf.toString("latin1");
   const fields = {};
@@ -59,3 +59,4 @@ export function bearer(req) {
   const header = req.headers.authorization || "";
   return header.startsWith("Bearer ") ? header.slice(7) : "";
 }
+
