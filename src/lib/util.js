@@ -1,5 +1,5 @@
-// crypto.randomUUID 与 navigator.clipboard 只在安全上下文（HTTPS/localhost）存在；
-// 手机经局域网 http://192.168.x.x 访问 dev server 时必须走降级路径。
+// crypto.randomUUID 與 navigator.clipboard 只在安全上下文（HTTPS/localhost）存在；
+// 手機經局域網 http://192.168.x.x 訪問 dev server 時必須走降級路徑。
 export function uid() {
   if (window.crypto?.randomUUID) return window.crypto.randomUUID();
   return `id-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
@@ -12,7 +12,7 @@ export async function copyText(text) {
       return true;
     }
   } catch {
-    // 继续尝试 execCommand 降级
+    // 繼續嘗試 execCommand 降級
   }
   try {
     const area = document.createElement("textarea");
@@ -29,3 +29,4 @@ export async function copyText(text) {
     return false;
   }
 }
+
