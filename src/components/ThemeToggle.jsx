@@ -3,11 +3,11 @@ import { Moon, Sun } from "lucide-react";
 
 function applyTheme(next) {
   document.documentElement.dataset.theme = next;
-  try { window.localStorage.setItem("aoweizhiyi_theme", next); } catch { /* 私隐模式静默降级 */ }
+  try { window.localStorage.setItem("aoweizhiyi_theme", next); } catch { /* 私隱模式靜默降級 */ }
 }
 
-// 三端共用的日/夜切换按钮。初始主题由 index.html 内联脚本在首帧前写入
-// <html data-theme>（localStorage 记忆优先，其次跟随系统偏好），此处只负责切换。
+// 三端共用的日/夜切換按鈕。初始主題由 index.html 內聯腳本在首幀前寫入
+// <html data-theme>（localStorage 記憶優先，其次跟隨系統偏好），此處只負責切換。
 export default function ThemeToggle({ className = "theme-toggle" }) {
   const [theme, setTheme] = useState(() => (document.documentElement.dataset.theme === "dark" ? "dark" : "light"));
   const next = theme === "dark" ? "light" : "dark";
@@ -23,3 +23,4 @@ export default function ThemeToggle({ className = "theme-toggle" }) {
     </button>
   );
 }
+
