@@ -1,7 +1,7 @@
 const baseUrl = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 const environmentToken = import.meta.env.VITE_API_TOKEN || "";
-// 商户与管理员令牌分开保存：商户登录后打开 /?page=admin 不应被视为已登录管理员，
-// 管理员令牌也不应发给商户接口。
+// 商戶與管理員令牌分開保存：商戶登錄後打開 /?page=admin 不應被視爲已登錄管理員，
+// 管理員令牌也不應發給商戶接口。
 const TOKEN_KEYS = {
   merchant: "aoweizhiyi_access_token",
   admin: "aoweizhiyi_admin_token",
@@ -19,7 +19,7 @@ function storeToken(scope, token) {
   try {
     window.sessionStorage.setItem(TOKEN_KEYS[scope], token);
   } catch {
-    // sessionStorage 不可用（如隐私模式）时令牌只存在于本次内存请求中
+    // sessionStorage 不可用（如隱私模式）時令牌只存在於本次內存請求中
   }
 }
 
@@ -264,3 +264,4 @@ export function normalizeShops(payload) {
     faqs: shop.faqs || shop.faq || [],
   }));
 }
+
