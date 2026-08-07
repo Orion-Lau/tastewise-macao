@@ -1,19 +1,19 @@
-// 建档 Agent（shop-onboarding）
-// 把商户提供的「店铺介绍 + 菜单文字」整理为结构化店铺草稿。
-// 红线：只整理商户提供的内容，不虚构价格/成分/过敏原；
-// 解析不了的行进入 warnings，菜品一律 confirmed=false 待人工确认。
+// 建檔 Agent（shop-onboarding）
+// 把商戶提供的「店鋪介紹 + 菜單文字」整理爲結構化店鋪草稿。
+// 紅線：只整理商戶提供的內容，不虛構價格/成分/過敏原；
+// 解析不了的行進入 warnings，菜品一律 confirmed=false 待人工確認。
 //
-// Live 模式：走 QwenPaw 智能体（提示词见 prompts/onboarding.md，LLM 对「奇怪的
-// 一行」的理解力优于正则）；validate() 强制草稿状态、allergens 留空、confirmed=false、
-// 无可信价格的条目剔除。mock 路径同步返回（agents.test.mjs 依赖），live 返回 Promise。
+// Live 模式：走 QwenPaw 智能體（提示詞見 prompts/onboarding.md，LLM 對「奇怪的
+// 一行」的理解力優於正則）；validate() 強制草稿狀態、allergens 留空、confirmed=false、
+// 無可信價格的條目剔除。mock 路徑同步返回（agents.test.mjs 依賴），live 返回 Promise。
 
 import { parseAgentJson } from "../lib/llm.js";
 
 const CATEGORY_HINTS = [
-  ["drink", /茶|咖啡|奶|汁|水|飲|饮|凍|冻|啤/],
-  ["dessert", /撻|挞|糕|布甸|布丁|甜|露|冰淇淋|雪糕/],
-  ["gift", /餅家?$|饼|蛋卷|蛋捲|糖|禮|礼|手信/],
-  ["snack", /包$|多士|治$|小食|串|餃|饺|腸粉|肠粉/],
+  ["drink", /茶|咖啡|奶|汁|水|飲|飲|凍|凍|啤/],
+  ["dessert", /撻|撻|糕|布甸|布丁|甜|露|冰淇淋|雪糕/],
+  ["gift", /餅家?$|餅|蛋卷|蛋捲|糖|禮|禮|手信/],
+  ["snack", /包$|多士|治$|小食|串|餃|餃|腸粉|腸粉/],
 ];
 
 const CATEGORIES = new Set(["main", "snack", "drink", "dessert", "gift"]);
@@ -58,10 +58,10 @@ export function runLocal({ description = "", menuText = "", locale = "zh" }) {
   };
 }
 
-// —— live 路径三段件：buildPrompt → llm.invoke → validate ——
+// —— live 路徑三段件：buildPrompt → llm.invoke → validate ——
 
 export function buildPrompt({ description = "", menuText = "", locale = "zh" }) {
-  // 用户消息格式与 prompts/onboarding.md 一致（对外字段名为 menu_text）
+  // 用戶消息格式與 prompts/onboarding.md 一致（對外字段名爲 menu_text）
   return { user: JSON.stringify({ locale, description, menu_text: menuText }) };
 }
 
@@ -80,19 +80,19 @@ export function validate(raw, { description = "" } = {}) {
     .map((dish, index) => {
       const zh = zhOf(dish?.name);
       const price = Number(dish?.price);
-      // 红线：没有可信「菜名 + 价格」的条目一律不进草稿（禁止编造价格）
+      // 紅線：沒有可信「菜名 + 價格」的條目一律不進草稿（禁止編造價格）
       if (!zh || !Number.isFinite(price) || price < 0) {
         warnings.push(`「${zh || "未知菜品"}」缺少可信價格，已略過，請人工補充。`);
         return null;
       }
       return {
-        id: `dish-${stamp}-${index}`, // 红线：id 一律由代码层生成
+        id: `dish-${stamp}-${index}`, // 紅線：id 一律由代碼層生成
         category: CATEGORIES.has(dish.category) ? dish.category : guessCategory(zh),
         price,
         name: { zh },
         desc: { zh: zhOf(dish?.desc) },
-        allergens: {}, // 红线：建档阶段不猜成分，过敏原一律留空待店主确认
-        confirmed: false, // 红线：全部待人工确认
+        allergens: {}, // 紅線：建檔階段不猜成分，過敏原一律留空待店主確認
+        confirmed: false, // 紅線：全部待人工確認
       };
     })
     .filter(Boolean);
@@ -108,7 +108,7 @@ export function validate(raw, { description = "" } = {}) {
       payments: (Array.isArray(src.payments) ? src.payments : [])
         .filter((entry) => typeof entry === "string" && entry.trim())
         .map((entry) => entry.trim()),
-      publication_status: "draft", // 红线：建档产物只能是草稿
+      publication_status: "draft", // 紅線：建檔產物只能是草稿
       dishes,
     },
     warnings,
@@ -128,3 +128,4 @@ async function runLive(input, llm) {
     return { ...runLocal(input), degraded: true };
   }
 }
+
