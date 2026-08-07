@@ -1,6 +1,6 @@
-# 澳味智译 · 視覺與體驗規範 v1.1
+# 澳味智譯 · 視覺與體驗規範 v1.1
 
-> 本規範定義澳味智译三端共用的視覺語言：色彩令牌、字階、陰影與動效語言、狀態語義。
+> 本規範定義澳味智譯三端共用的視覺語言：色彩令牌、字階、陰影與動效語言、狀態語義。
 
 ## 0. 創作立場：提純，而非推翻
 
@@ -9,7 +9,7 @@
 
 1. **系統化**：把散落的 40+ 處裸色值、20+ 種隨手字號、15 種圓角收進三層令牌；
 2. **提純**：修正無障礙硬傷（7–9px 正文字、金色文字對比不足、十種微差綠）；
-3. **一筆科技光**：以「霓虹」為唯一的現代性語彙，克制地用於「有生命的東西」。
+3. **一筆科技光**：以「霓虹」為唯一的現代性語彙，剋制地用於「有生命的東西」。
 
 ---
 
@@ -54,7 +54,7 @@
 --surface:        var(--paper-200);   /* 頁面底 */
 --surface-raised: var(--paper-0);     /* 卡片 */
 --surface-sunken: var(--paper-300);   /* 分區帶、骨架屏 */
---surface-inverse: var(--ink-800);    /* 深色環境（hero/侧栏顶栏） */
+--surface-inverse: var(--ink-800);    /* 深色環境（hero/側欄頂欄） */
 --text:           var(--ink-800);
 --text-secondary: var(--ink-600);
 --text-muted:     #6f7a73;            /* 僅限 ≥12px 文本 */
@@ -75,7 +75,7 @@
 |----|--------|------|
 | 遊客端 | 福隆紅 `--red-500` | 街市、食慾、煙火氣 |
 | 商戶端 | 餅金 `--gold-500` | 賬房、手藝、爐火 |
-| 平台端 | 瓷磚藍 `--azulejo-500` | 門牌、公證、秩序 |
+| 平臺端 | 瓷磚藍 `--azulejo-500` | 門牌、公證、秩序 |
 
 ### 2.4 對比度規則（硬性）
 
@@ -111,7 +111,7 @@
 --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 ```
 
-（如未來允許自托管字體，display 級首選「思源宋體 Heavy」，僅 subset 首屏用字。）
+（如未來允許自託管字體，display 級首選「思源宋體 Heavy」，僅 subset 首屏用字。）
 
 ### 3.3 多語規則
 
@@ -176,7 +176,7 @@
 | 模式 | 定義 | 已實現 | 用途 |
 |------|------|--------|------|
 | 蓋章 press | `:active` 位移+陰影收平，--t-tap | ✅ | 一切章壓元素 |
-| 揭紙 reveal | 淡入+上浮 14px，--ease-brush，錯峰 55ms | ✅ | 列表/卡片入場 |
+| 揭紙 reveal | 淡入+上浮 14px，--ease-brush，錯峯 55ms | ✅ | 列表/卡片入場 |
 | 流光 shimmer | 1.6s 掃光 | ✅ | 骨架屏專用 |
 | **霓虹息 breathe** | glow 2.4s 呼吸（box-shadow 擴縮） | ⬜ Phase 2 | live 圓點、AI 生成標記、QR 卡 |
 | **換場 crossfade** | 視圖切換 240ms 淡入 | ⬜ Phase 2 | 三端路由切換 |
@@ -190,7 +190,7 @@
 ## 7. 圖標與印章
 
 - 圖標庫維持 lucide，線寬 1.5px；尺寸只取 13 / 15 / 17 / 20 / 26。
-- **印章形制**（圓環+單字 serif）保留為最高身份等級：店徽、菜印、部門章（遊客「味」、商戶「錄」、平台「審」）。印章永不與 lucide 圖標並列在同一視覺層。
+- **印章形制**（圓環+單字 serif）保留為最高身份等級：店徽、菜印、部門章（遊客「味」、商戶「錄」、平臺「審」）。印章永不與 lucide 圖標並列在同一視覺層。
 
 ---
 
@@ -199,29 +199,53 @@
 | 組件 | 規範要點 |
 |------|---------|
 | 主按鈕 | 紅底白字 + 章壓影；`:hover` 上浮 1px、`:active` 蓋章；高度 44–48px（觸控下限） |
-| 次按鈕 |…104937 tokens truncated…)} type="button">{item.confirmed ? <><CheckCircle2 size={15} />{t.confirmed}</> : <>{t.confirmDish}<ArrowRight size={14} /></>}</button></article>)}</div>
-    <div className="ms-actions"><button className="ms-outline" onClick={() => setItems((old) => old.map((item) => ({ ...item, confirmed: true })))} type="button"><ShieldCheck size={16} />{t.confirmAll}</button><button className="ms-primary" disabled={!done} onClick={onNext} type="button">{t.translate}<ArrowRight size={16} /></button></div>
-  </div>;
-}
+| 次按鈕 | 紙底墨字細線框；hover 描邊變 accent；無陰影 |
+| 輸入框 | 高 44–48px，`--r-input`；focus 用 azulejo 3px 外圈（全端統一，非角色色） |
+| 狀態徽章 | 見 §9；一律「銘」級 mono 小字 + `--r-chip` |
+| 店鋪卡 | 藝術區(192px 漸變+紋樣) + 紙身；hover 浮紙影 + 圓箭染紅 |
+| 對話框 | `--r-panel`；backdrop `rgba(24,37,33,.74)+blur(6px)`；入場 220ms 縮放淡入 |
+| 聊天氣泡 | 用戶=azulejo 圓角 13/3、助手=紙底線框 3/13；風險提示紅紙底、確認來源綠銘 |
+| 表格（管理端） | 表頭「銘」級 + `--surface-sunken` 底；行高 ≥40px |
+| QR 物料卡 | 白底 7px 內邊距（掃碼安靜區）；配「霓虹息」以示「這是活的菜單」 |
 
-function TranslationPanel({ t, items, setItems, shopId, coverage, onNext }) {
-  const [locale, setLocale] = useState("en"); const [loading, setLoading] = useState(false); const [error, setError] = useState("");
-  const update = (id, field, value) => setItems((old) => old.map((item) => item.id === id ? { ...item, [field]: { ...item[field], [locale]: value } } : item));
-  const generate = async () => { setLoading(true); setError(""); try { if (apiConfig.configured) { const result = await api.translateMenu({ shopId, items }); if (!Array.isArray(result.items)) throw new Error("API 未返回翻译后的 items 数组"); setItems(result.items.map((item) => toItem(item, item.confirmed))); } else { await new Promise((r) => setTimeout(r, 650)); setItems((old) => old.map((item) => ({ ...item, name: { ...item.name, [locale]: item.name[locale] || item.name.en || item.name.zh }, desc: { ...item.desc, [locale]: item.desc[locale] || item.desc.en || item.desc.zh } }))); } } catch (nextError) { setError(nextError.message); } finally { setLoading(false); } };
-  return <div><PageHead kicker="TRANSLATIONS" title={t.translateTitle} sub={t.translateSub} action={<div className="ms-coverage"><span>{t.coverage}</span><strong>{coverage}%</strong></div>} />
-    <div className="ms-language-tabs">{LOCALES.map((code) => <button className={locale === code ? "active" : ""} onClick={() => setLocale(code)} type="button" key={code}>{code.toUpperCase()}<span>{items.filter((item) => item.name[code] && item.desc[code]).length}/{items.length}</span></button>)}<button className="generate" onClick={generate} disabled={loading} type="button">{loading ? <Loader2 className="spin" size={15} /> : <Globe2 size={15} />}{loading ? t.generating : t.generate}</button></div>{error ? <p className="ms-error"><AlertCircle size={14} />{error}</p> : null}
-    <div className="ms-translation-list">{items.map((item) => <article key={item.id}><div><strong>{item.name.zh}</strong><small>{item.desc.zh}</small></div><label>{t.dishName}<input value={item.name[locale] || ""} onChange={(e) => update(item.id, "name", e.target.value)} /></label><label>{t.description}<textarea value={item.desc[locale] || ""} onChange={(e) => update(item.id, "desc", e.target.value)} /></label></article>)}</div>
-    <div className="ms-actions"><button className="ms-primary" disabled={coverage < 100} onClick={onNext} type="button">{t.publish}<ArrowRight size={16} /></button></div>
-  </div>;
-}
+## 9. 狀態語義（全端統一，替換現存十種微差綠）
 
-function PublishPanel({ t, items, status, setStatus, rejectionReason, shopId, safetyPct, translationPct, qrData, publicUrl, onPreview }) {
-  const [loading, setLoading] = useState(false); const [copied, setCopied] = useState(false); const [svgUrl, setSvgUrl] = useState(""); const [error, setError] = useState(""); const ready = items.length > 0 && safetyPct === 100 && translationPct === 100;
-  useEffect(() => { let oldUrl = ""; if (publicUrl) QRCode.toString(publicUrl, { type: "svg", margin: 2, color: { dark: "#20342f", light: "#fffdf8" } }).then((svg) => { oldUrl = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" })); setSvgUrl(oldUrl); }); return () => { if (oldUrl) URL.revokeObjectURL(oldUrl); }; }, [publicUrl]);
-  const submit = async () => { setLoading(true); setError(""); try { if (apiConfig.configured) await api.submitMenu({ shopId, items }); else await new Promise((r) => setTimeout(r, 650)); setStatus("pending"); } catch (nextError) { setError(nextError.message); } finally { setLoading(false); } };
-  return <div><PageHead kicker="PUBLISH" title={t.submitTitle} sub={t.submitSub} />
-    {status === "rejected" ? <div className="ms-rejected"><AlertCircle size={18} /><span><strong>本次更新被退回</strong><small>{rejectionReason || "请根据平台意见修改后重新提交。"}</small></span></div> : null}{error ? <p className="ms-error"><AlertCircle size={14} />{error}</p> : null}
-    <div className="ms-publish-grid"><section className="ms-panel ms-submit-card"><div className={`ms-submit-state ${ready ? "ready" : ""}`}>{ready ? <CheckCircle2 size={25} /> : <AlertCircle size={25} />}<div><strong>{ready ? t.ready : t.notReady}</strong><small>{status === "pending" ? t.submitted : `${items.length} ${t.dishes}`}</small></div></div><div className="ms-checklist"><p><FileSearch /><span>{t.review}<small>{items.length} / {items.length}</small></span><CheckCircle2 /></p><p><ShieldCheck /><span>{t.safety}<small>{safetyPct}%</small></span>{safetyPct === 100 ? <CheckCircle2 /> : <AlertCircle />}</p><p><Globe2 /><span>{t.translate}<small>{translationPct}%</small></span>{translationPct === 100 ? <CheckCircle2 /> : <AlertCircle />}</p></div><button className="ms-primary ms-wide" disabled={!ready || loading || status === "pending"} onClick={submit} type="button">{loading ? <><Loader2 className="spin" size={16} />{t.submitting}</> : status === "pending" ? <><BookOpenCheck size={16} />{t.submitted}</> : <><Send size={16} />{status === "rejected" ? "重新提交审核" : t.submit}</>}</button></section>
-      <section className="ms-panel ms-qr-card print-card"><div><span className="ms-kicker">LIVE MENU</span><h2>{t.onlineMenu}</h2><p>{t.qrHelp}</p></div>{qrData ? <img src={qrData} alt="Menu QR code" /> : <Loader2 className="spin" />}<code>{publicUrl}</code><div className="ms-material-actions">{qrData ? <a className="ms-outline" href={qrData} download="aoweizhiyi-menu-qr.png"><Download size={15} />PNG</a> : null}{svgUrl ? <a className="ms-outline" href={svgUrl} download="aoweizhiyi-menu-qr.svg"><Download size={15} />SVG</a> : null}<button className="ms-outline" onClick={async () => { if (await copyText(publicUrl)) { setCopied(true); setTimeout(() => setCopied(false), 1200); } }} type="button"><ClipboardCopy size={15} />{copied ? "已複製" : "複製連結"}</button><button className="ms-outline" onClick={() => window.print()} type="button"><Printer size={15} />列印桌牌</button><button className="ms-primary" onClick={onPreview} type="button">{t.preview}<ArrowRight size={15} /></button></div></section></div>
-  </div>;
-}
+| 狀態 | 底 | 字 | 場景 |
+|------|-----|-----|------|
+| 草稿 draft | `--paper-300` | `--ink-600` | 商戶菜單草稿 |
+| 審核中 pending | `--warn-bg` | `--warn-text` | 排隊審核 |
+| 已發布 published / 在線 live | `--moss-100` | `--moss-700` | 上線菜單、API 已連 |
+| 已退回 rejected / 風險 risk | `#f7e6e2` | `--red-700` | 退回、風險旗標 |
+
+---
+
+## 10. 現狀審計（違例清單，Phase 0/1 整改依據）
+
+1. **字號失控**：三份 CSS 共出現 7 / 7.5 / 8 / 8.5 / 9 / 9.5 / 10 / 10.5 / 11 px 等二十餘檔；
+   低於 10px 的**文本**（`.dialog-languages span` 7px、`.detail-note span` 7px、
+   `.ms-step-row small` 7.5px、`.admin-table strong` 7.5px、`.ms-shop-grid i` 7px 等）違反 §3.1。
+2. **裸色值 ≈40 處**未進令牌（#dfb759、#7e281f、#e8dfcb、#23332e、#648066、#a99d83…）。
+3. **綠色十胞胎**：#4f7054 / #4d6c53 / #4e6e54 / #557b5e / #59705b / #5d7b62 / #4f7459 /
+   #66806a / #648066 / #4d6e53 各自為政 → 統一收斂到 moss 三檔。
+4. **金字對比不足**：紙面上 `--gold` 直接做小字（`.story-number`、`.ms-onboard-head>span` 等）≈2.5:1。
+5. **圓角/間距隨手值**：radius 十五種、奇數 margin 遍佈 → §4 檔位化。
+6. **章壓混血**：`.step-icon` 用 rgba 章壓影，違反 §4.3。
+
+---
+
+## 11. 實施路線圖
+
+| 期 | 內容 | 狀態 |
+|----|------|------|
+| **P0 快贏** | 8.5px 以下文本提升至 ≥9.5px；十種微差綠歸一為 moss 六檔令牌；紙面金字改 gold-700；章壓影去 rgba | ✅ 2026-07-03 已執行 |
+| **P1 令牌化** | moss/gold 檔位已入 `:root`；其餘裸色歸倉、spacing/radius 檔位化 | ◐ 部分執行 |
+| **P2 組件精修** | 三端角色色（側欄高亮條＋kicker＋進度環）✅；霓虹息＋換場動效✅；狀態徽章組件化、QR 物料卡精修 ⬜ | ◐ 部分執行 |
+| **P3 暗色主題「霓虹夜場」** | 首幀前內聯腳本寫入 `<html data-theme>`（localStorage 記憶 → 系統偏好）；`[data-theme="dark"]` 單塊覆寫令牌；表面/文字分離（`--ink-solid`/`--cream` 永不翻轉，墨青面板夜場保持墨青形成層次）；菜單紙/店員卡以局部令牌重設保持米白；QR 碼強制白底；三端頂欄日/夜切換按鈕 | ✅ 2026-07-03 已執行 |
+
+每期單獨可發布；P0/P1 不改變任何視覺意圖，P2 起纔有可感知的「新樣子」。
+
+---
+
+*維護約定：新增顏色必須先進原色層再經語義層引用；新增動效必須掛 reduced-motion；
+任何組件級新規則追加到本文件 §8，並在 HANDOFF.md 記錄輪次。*
+
