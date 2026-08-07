@@ -1,7 +1,7 @@
-// 菜单识别 Agent（menu-extractor）
-// 正式环境：接收原档（PDF/JPG/PNG/HEIC），经 OCR + LLM 结构化为菜品草稿。
-// 参考实现不接 OCR，返回固定示范草稿并如实标注 warnings；
-// 所有识别结果 confirmed=false，必须经商户逐项校对。
+// 菜單識別 Agent（menu-extractor）
+// 正式環境：接收原檔（PDF/JPG/PNG/HEIC），經 OCR + LLM 結構化爲菜品草稿。
+// 參考實現不接 OCR，返回固定示範草稿並如實標註 warnings；
+// 所有識別結果 confirmed=false，必須經商戶逐項校對。
 
 const TEMPLATE_ITEMS = [
   { id: "ext-1", category: "snack", price: 32, name: { zh: "招牌豬扒包" }, desc: { zh: "豬扒即叫即炸" }, allergens: { pork: true }, confirmed: false },
