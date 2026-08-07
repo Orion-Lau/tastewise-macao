@@ -1,6 +1,6 @@
-// QwenPaw 平台环境配置：唯一入口是环境变量（变量清单见 .env.example）。
-// 未配置 base+key 时 llm.enabled=false，全部 agent 自动走本地 mock——
-// 演示、测试、评审现场断网都不受影响（QWENPAW_PLAN.md 总原则 2）。
+// QwenPaw 平臺環境配置：唯一入口是環境變量（變量清單見 .env.example）。
+// 未配置 base+key 時 llm.enabled=false，全部 agent 自動走本地 mock——
+// 演示、測試、評審現場斷網都不受影響（QWENPAW_PLAN.md 總原則 2）。
 
 const AGENT_NAMES = ["assistant", "translator", "marketing", "faq-generator", "onboarding", "menu-extractor"];
 
@@ -17,3 +17,4 @@ export function loadConfig(env = process.env) {
     timeout: Number(env.QWENPAW_TIMEOUT_MS) || 30000,
   };
 }
+
