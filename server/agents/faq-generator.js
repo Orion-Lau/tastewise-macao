@@ -1,10 +1,10 @@
 // FAQ 生成 Agent（faq-generator）
-// 只根据店铺档案（注入的 shop 快照）生成常见问答草稿；
-// 忌口相关答案强制 requires_confirmation=true。不虚构档案里没有的事实。
+// 只根據店鋪檔案（注入的 shop 快照）生成常見問答草稿；
+// 忌口相關答案強制 requires_confirmation=true。不虛構檔案裏沒有的事實。
 //
-// Live 模式：走 QwenPaw 智能体（提示词见 prompts/faq-generator.md）；validate()
-// 生成 id、规整语种结构、忌口类问答强制二次确认。mock 路径同步返回
-// （agents.test.mjs 依赖），live 路径返回 Promise。
+// Live 模式：走 QwenPaw 智能體（提示詞見 prompts/faq-generator.md）；validate()
+// 生成 id、規整語種結構、忌口類問答強制二次確認。mock 路徑同步返回
+// （agents.test.mjs 依賴），live 路徑返回 Promise。
 
 import { parseAgentJson } from "../lib/llm.js";
 
@@ -14,8 +14,8 @@ const localize = (value, lang = "zh") => {
   return value[lang] || value.zh || Object.values(value)[0] || "";
 };
 
-// 命中即强制二次确认的忌口/过敏关键词（问题与答案一起检测）
-const CONFIRM_RX = /豬|猪|pork|porco|素食|vegan|vegetarian|清真|halal|過敏|过敏|allerg|坚果|堅果|ナッツ|海鮮|海鲜|seafood|忌口|蛋奶|麩質|麸质|gluten/i;
+// 命中即強制二次確認的忌口/過敏關鍵詞（問題與答案一起檢測）
+const CONFIRM_RX = /豬|豬|pork|porco|素食|vegan|vegetarian|清真|halal|過敏|過敏|allerg|堅果|堅果|ナッツ|海鮮|海鮮|seafood|忌口|蛋奶|麩質|麩質|gluten/i;
 const EMPTY_WARNING = "店鋪檔案資料不足，未能生成 FAQ，請先完善店鋪資料。";
 
 export function runLocal({ shop, locale = "zh" }) {
@@ -65,10 +65,10 @@ export function runLocal({ shop, locale = "zh" }) {
   return { faqs, warnings: faqs.length ? [] : [EMPTY_WARNING] };
 }
 
-// —— live 路径三段件：buildPrompt → llm.invoke → validate ——
+// —— live 路徑三段件：buildPrompt → llm.invoke → validate ——
 
 export function buildPrompt({ shop, locale = "zh" }) {
-  // 用户消息格式与 prompts/faq-generator.md 一致
+  // 用戶消息格式與 prompts/faq-generator.md 一致
   const dishes = (shop?.dishes || []).map((dish) => ({
     id: dish.id,
     featured: dish.featured || undefined,
@@ -103,10 +103,10 @@ export function validate(raw) {
       if (!answer.en) answer.en = answer.zh;
       const text = `${Object.values(question).join(" ")} ${Object.values(answer).join(" ")}`;
       return {
-        id: `faq-${stamp}-${index + 1}`, // 红线：id 一律由代码层生成
+        id: `faq-${stamp}-${index + 1}`, // 紅線：id 一律由代碼層生成
         question,
         answer,
-        // 红线：忌口/过敏相关问答强制二次确认
+        // 紅線：忌口/過敏相關問答強制二次確認
         requires_confirmation: CONFIRM_RX.test(text) ? true : Boolean(entry.requires_confirmation),
       };
     })
