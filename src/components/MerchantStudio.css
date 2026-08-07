@@ -212,7 +212,7 @@
 
 .ms-primary:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: none; }
 
-/* 商户端角色色：饼金（侧栏选中高亮条；kicker 与进度环已改 gold） */
+/* 商戶端角色色：餅金（側欄選中高亮條；kicker 與進度環已改 gold） */
 .ms-sidebar nav button.active { box-shadow: inset 3px 0 0 var(--gold-500); }
 
 /* ── 暗色主題（夜場）覆寫 ── */
@@ -223,7 +223,7 @@
 [data-theme="dark"] .ms-insight-chart > p { background: #312a15; color: #dcc27c; }
 [data-theme="dark"] :is(.ms-nav-label, .ms-sidebar nav button > span) { color: #8b988e; }
 [data-theme="dark"] .ms-sidebar nav button.active > span { color: var(--gold); }
-/* QR 碼必須保持白底，掃碼器才可靠 */
+/* QR 碼必須保持白底，掃碼器纔可靠 */
 [data-theme="dark"] .ms-qr-card > img { background: #fff; }
 .ms-theme { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: transparent; color: rgba(255,255,255,.72); cursor: pointer; }
 .ms-theme:hover { color: #fff; }
