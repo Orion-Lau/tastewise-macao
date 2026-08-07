@@ -1,11 +1,11 @@
-// 翻译 Agent（menu-translator）
-// 生成 en/pt/ja 菜单草稿。词典（lexicon）由调用方注入——mock 路径靠它出译文。
-// 红线：输出永远是草稿，不自动发布；译文缺失时生成带「draft」标记的占位文本
-// 并写入 warnings，逼出人工校对。
+// 翻譯 Agent（menu-translator）
+// 生成 en/pt/ja 菜單草稿。詞典（lexicon）由調用方注入——mock 路徑靠它出譯文。
+// 紅線：輸出永遠是草稿，不自動發佈；譯文缺失時生成帶「draft」標記的佔位文本
+// 並寫入 warnings，逼出人工校對。
 //
-// Live 模式：走 QwenPaw 翻译智能体（提示词见 prompts/translator.md）；validate()
-// 保证条目与输入一一对应、已有译文不被覆盖、永远草稿；平台漏译的语种回退占位标记。
-// mock 路径同步返回（agents.test.mjs 依赖），live 路径返回 Promise。
+// Live 模式：走 QwenPaw 翻譯智能體（提示詞見 prompts/translator.md）；validate()
+// 保證條目與輸入一一對應、已有譯文不被覆蓋、永遠草稿；平臺漏譯的語種回退佔位標記。
+// mock 路徑同步返回（agents.test.mjs 依賴），live 路徑返回 Promise。
 
 import { parseAgentJson } from "../lib/llm.js";
 
@@ -33,10 +33,10 @@ export function runLocal({ items = [], locales = ["en", "pt", "ja"], lexicon = {
   return { items: translated, warnings, status: "draft" };
 }
 
-// —— live 路径三段件：buildPrompt → llm.invoke → validate ——
+// —— live 路徑三段件：buildPrompt → llm.invoke → validate ——
 
 export function buildPrompt({ items = [], locales = ["en", "pt", "ja"] }) {
-  // 用户消息格式与 prompts/translator.md 一致；已有译文一并送入（规则：非空原样保留）
+  // 用戶消息格式與 prompts/translator.md 一致；已有譯文一併送入（規則：非空原樣保留）
   return {
     user: JSON.stringify({
       locales,
@@ -49,13 +49,13 @@ export function validate(raw, { items = [], locales = ["en", "pt", "ja"] } = {})
   if (!raw || !Array.isArray(raw.items)) throw new Error("BAD_ITEMS");
   const warnings = (Array.isArray(raw.warnings) ? raw.warnings : []).filter((entry) => typeof entry === "string");
   const byId = new Map(raw.items.filter((item) => item && item.id != null).map((item) => [item.id, item]));
-  // 红线：以输入条目为基准逐一对应（防增删、防顺序错乱、防 id 幻觉）
+  // 紅線：以輸入條目爲基準逐一對應（防增刪、防順序錯亂、防 id 幻覺）
   const translated = items.map((item) => {
     const out = byId.get(item.id) || {};
     const name = { ...item.name };
     const desc = { ...item.desc };
     locales.forEach((locale) => {
-      // 红线：已有译文原样保留；LLM 结果只补空缺；漏译回退占位草稿
+      // 紅線：已有譯文原樣保留；LLM 結果只補空缺；漏譯回退佔位草稿
       if (!name[locale]?.trim()) {
         const hit = typeof out.name?.[locale] === "string" && out.name[locale].trim();
         name[locale] = hit || translate(item.name?.zh, locale, {}, warnings, "菜名");
@@ -67,7 +67,7 @@ export function validate(raw, { items = [], locales = ["en", "pt", "ja"] } = {})
     });
     return { ...item, name, desc };
   });
-  // 红线：永远草稿，不自动发布
+  // 紅線：永遠草稿，不自動發佈
   return { items: translated, warnings, status: "draft" };
 }
 
@@ -84,3 +84,4 @@ async function runLive(input, llm) {
     return { ...runLocal(input), degraded: true };
   }
 }
+
