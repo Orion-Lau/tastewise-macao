@@ -1,0 +1,26 @@
+{
+  "name": "aoweizhiyi-macao-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "server": "node --env-file-if-exists=.env server/index.js",
+    "agent": "node --env-file-if-exists=.env server/agents/run.js",
+    "test": "node --test server/agents.test.mjs",
+    "eval:live": "node --env-file-if-exists=.env --test server/eval-live.test.mjs"
+  },
+  "dependencies": {
+    "lucide-react": "^1.22.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "vite": "^8.1.2"
+  }
+}
+
