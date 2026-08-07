@@ -18,7 +18,7 @@
 
 .admin-table-empty{padding:22px 18px;margin:0;font-size:.86rem;color:var(--muted)}
 
-/* 平台端角色色：瓷砖蓝（侧栏选中高亮条；页头 kicker 已改 blue） */
+/* 平臺端角色色：瓷磚藍（側欄選中高亮條；頁頭 kicker 已改 blue） */
 .admin-shell > aside nav button.active { box-shadow: inset 3px 0 0 var(--blue); }
 
 /* ── 暗色主題（夜場）覆寫 ── */
