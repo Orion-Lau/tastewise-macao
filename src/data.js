@@ -35,7 +35,7 @@ export const SAMPLE_SHOPS = [
       {
         id: "beef-hofun", category: "main", price: 48, featured: true,
         name: { zh: "乾炒牛河", en: "Stir-fried Beef Ho Fun", pt: "Chow fun de vaca", ja: "牛肉入り炒め河粉" },
-        desc: { zh: "大火豉油乾炒，河粉乾身，牛肉嫩滑。", en: "High-heat wok-fried rice noodles with tender beef.", pt: "Massa de arroz salteada em lume forte com vaca.", ja: "強火で香ばしく炒めた平打ち米麺と牛肉。" },
+        desc: { zh: "大火豉油乾炒，河粉乾身，牛肉嫩滑。", en: "High-heat wok-fried rice noodles with tender beef.", pt: "Massa de arroz salteada em lume forte com vaca.", ja: "強火で香ばしく炒めた平打ち米麪と牛肉。" },
         tags: ["招牌", "不含豬肉"], ingredients: ["牛肉", "河粉", "芽菜", "洋蔥"], symbol: "鑊",
       },
       {
@@ -87,13 +87,13 @@ export const SAMPLE_SHOPS = [
       {
         id: "egg-roll", category: "gift", price: 38,
         name: { zh: "手工蛋卷", en: "Handmade Egg Roll", pt: "Rolo de ovo artesanal", ja: "手作りエッグロール" },
-        desc: { zh: "薄脆蛋香，獨立包裝方便送禮。", en: "Light, crisp and individually wrapped for gifting.", pt: "Leve, crocante e embalado individualmente.", ja: "薄くてサクサク。個包装でお土産にも。" },
+        desc: { zh: "薄脆蛋香，獨立包裝方便送禮。", en: "Light, crisp and individually wrapped for gifting.", pt: "Leve, crocante e embalado individualmente.", ja: "薄くてサクサク。個包裝でお土産にも。" },
         tags: ["送禮", "含蛋奶"], ingredients: ["雞蛋", "牛油", "麵粉"], symbol: "卷",
       },
       {
         id: "ginger-candy", category: "gift", price: 30,
-        name: { zh: "老薑軟糖", en: "Soft Ginger Candy", pt: "Rebuçado de gengibre", ja: "生姜ソフトキャンディ" },
-        desc: { zh: "辛香回甘，適合旅途隨身帶。", en: "Warm ginger heat with a clean, sweet finish.", pt: "Picante de gengibre com final doce.", ja: "生姜の辛さとやさしい甘み。" },
+        name: { zh: "老薑軟糖", en: "Soft Ginger Candy", pt: "Rebuçado de gengibre", ja: "生薑ソフトキャンディ" },
+        desc: { zh: "辛香回甘，適合旅途隨身帶。", en: "Warm ginger heat with a clean, sweet finish.", pt: "Picante de gengibre com final doce.", ja: "生薑の辛さとやさしい甘み。" },
         tags: ["素食可", "送禮"], ingredients: ["老薑", "砂糖", "麥芽糖"], symbol: "薑",
       },
     ],
@@ -103,7 +103,7 @@ export const SAMPLE_SHOPS = [
     accent: "blue",
     monogram: "啡",
     name: { zh: "關前咖啡室", en: "Café Ervanários", pt: "Café Ervanários", ja: "エルヴァナリオス・カフェ" },
-    type: { zh: "舊藥材舖咖啡室", en: "Old-town coffee room", pt: "Café no bairro antigo", ja: "旧市街のカフェ" },
+    type: { zh: "舊藥材舖咖啡室", en: "Old-town coffee room", pt: "Café no bairro antigo", ja: "舊市街のカフェ" },
     district: { zh: "關前正街", en: "Rua dos Ervanários", pt: "Rua dos Ervanários", ja: "関前正街" },
     address: "關前正街 31 號",
     hours: "08:30–18:00",
@@ -115,7 +115,7 @@ export const SAMPLE_SHOPS = [
       zh: "老藥材舖改成的咖啡室，留下整面百子櫃。葡撻約每二十分鐘出爐，窗邊仍看得見舊城招牌。",
       en: "A café inside an old herbal medicine shop, with the wall of drawers preserved and fresh pastéis de nata every twenty minutes.",
       pt: "Um café numa antiga ervanária, com as gavetas preservadas e pastéis de nata acabados de sair do forno.",
-      ja: "漢方薬店を改装したカフェ。薬棚を残し、エッグタルトは約20分ごとに焼き上がります。",
+      ja: "漢方薬店を改裝したカフェ。薬棚を殘し、エッグタルトは約20分ごとに焼き上がります。",
     },
     dishes: [
       {
