@@ -30,7 +30,7 @@ import { getCopy, LANGS } from "./i18n.js";
 import { api, apiConfig, normalizeShops } from "./lib/api.js";
 import { copyText, uid } from "./lib/util.js";
 import ThemeToggle from "./components/ThemeToggle.jsx";
-// 路由级代码分割：游客扫码只下载游客端；商户/管理端代码按需加载
+// 路由級代碼分割：遊客掃碼只下載遊客端；商戶/管理端代碼按需加載
 const MerchantStudio = lazy(() => import("./components/MerchantStudio.jsx"));
 const AdminConsole = lazy(() => import("./components/AdminConsole.jsx"));
 
@@ -66,10 +66,10 @@ function Header({ lang, setLang, view, go, isLive }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <button className="brand" onClick={() => go({ name: "home" })} type="button" aria-label="澳味智译 home">
+        <button className="brand" onClick={() => go({ name: "home" })} type="button" aria-label="澳味智譯 home">
           <span className="brand-mark">味</span>
           <span>
-            <b>澳味智译</b>
+            <b>澳味智譯</b>
             <small>TASTEWISE · MACAO</small>
           </span>
         </button>
@@ -156,7 +156,7 @@ function Home({ shops, lang, openShop, onMerchant, loading, error, onRetry }) {
             </div>
           </div>
           <div className="hero-menu" aria-label={t.featured}>
-            <div className="hero-sign"><span>澳</span><span>味</span><span>智</span><span>译</span></div>
+            <div className="hero-sign"><span>澳</span><span>味</span><span>智</span><span>譯</span></div>
             <div className="menu-paper">
               <div className="paper-head">
                 <span>{t.featured}</span><Sparkles size={15} />
@@ -282,7 +282,7 @@ function ShopView({ shop, lang, setLang, go }) {
 
   if (["unpublished", "pending", "in_review", "rejected"].includes(publicationStatus)) {
     const statusText = publicationStatus === "rejected" ? "此菜單正在修改中" : publicationStatus === "unpublished" ? "此菜單尚未發布" : "此菜單正在審核中";
-    return <main className="unavailable-page"><button className="back-link dark" onClick={() => go({ name: "home" })} type="button"><ChevronLeft size={17} />{t.back}</button><div><Store size={34} /><span>MENU STATUS</span><h1>{statusText}</h1><p>店主更新完成並通過平台檢查後，菜單會在原有連結自動上線。</p></div></main>;
+    return <main className="unavailable-page"><button className="back-link dark" onClick={() => go({ name: "home" })} type="button"><ChevronLeft size={17} />{t.back}</button><div><Store size={34} /><span>MENU STATUS</span><h1>{statusText}</h1><p>店主更新完成並通過平臺檢查後，菜單會在原有連結自動上線。</p></div></main>;
   }
 
   return (
@@ -335,7 +335,7 @@ function MenuTab({ shop, lang, onDish }) {
   const dishes = shop.dishes || [];
   const featured = dishes.find((dish) => dish.id === shop.featured) || dishes.find((dish) => dish.featured) || dishes[0];
   const filterLabels = {
-    zh: { noPork: "不吃豬肉", veg: "素食", noNuts: "堅果過敏", noSeafood: "海鮮過敏", budget: "≤ 50 MOP", gift: "適合送禮" },
+    zh: { noPork: "不喫豬肉", veg: "素食", noNuts: "堅果過敏", noSeafood: "海鮮過敏", budget: "≤ 50 MOP", gift: "適合送禮" },
     en: { noPork: "No pork", veg: "Vegetarian", noNuts: "Nut allergy", noSeafood: "Seafood allergy", budget: "≤ 50 MOP", gift: "Gifts" },
     pt: { noPork: "Sem porco", veg: "Vegetariano", noNuts: "Sem frutos secos", noSeafood: "Sem marisco", budget: "≤ 50 MOP", gift: "Lembranças" },
     ja: { noPork: "豚肉なし", veg: "ベジタリアン", noNuts: "ナッツなし", noSeafood: "魚介なし", budget: "≤ 50 MOP", gift: "お土産" },
@@ -405,7 +405,7 @@ function DishDialog({ dish, shop, lang, onClose }) {
   const [copied, setCopied] = useState(false);
   const dialogRef = useRef(null);
   useEffect(() => {
-    // ESC 关闭 + Tab 焦点圈禁在弹窗内；关闭时焦点归还触发元素
+    // ESC 關閉 + Tab 焦點圈禁在彈窗內；關閉時焦點歸還觸發元素
     const previous = document.activeElement;
     const onKey = (event) => {
       if (event.key === "Escape") { onClose(); return; }
@@ -472,7 +472,7 @@ function fallbackAnswer(shop, query, lang) {
   const featured = dishes.find((dish) => dish.featured) || dishes[0];
   const porkQuery = /pork|porco|豬|豚/.test(q);
   const payQuery = /pay|payment|alipay|支付|付款|支払|pagamento/.test(q);
-  const budgetQuery = /50|budget|預算|以内|menos|até/.test(q);
+  const budgetQuery = /50|budget|預算|以內|menos|até/.test(q);
   if (lang === "en") {
     if (porkQuery) return `Pork-free options include ${names(noPork)}. Please confirm strict dietary needs with the staff.`;
     if (payQuery) return `The shop accepts ${(shop.payments || []).join(", ")}. Please follow the payment counter's latest notice.`;
@@ -487,12 +487,12 @@ function fallbackAnswer(shop, query, lang) {
   }
   if (lang === "ja") {
     if (porkQuery) return `豚肉なしの候補は ${names(noPork)} です。厳格な制限はスタッフにご確認ください。`;
-    if (payQuery) return `支払い方法：${(shop.payments || []).join("、")}。店頭の最新案内をご確認ください。`;
-    if (budgetQuery) return `50 MOP以内なら ${names(under50)} があります。`;
+    if (payQuery) return `支払い方法：${(shop.payments || []).join("、")}。店頭の最新案內をご確認ください。`;
+    if (budgetQuery) return `50 MOP以內なら ${names(under50)} があります。`;
     return `店主のおすすめは ${localize(featured?.name, lang)}（MOP ${featured?.price}）です。${localize(featured?.desc, lang)}`;
   }
   if (porkQuery) return `不含豬肉的選擇有：${names(noPork)}。如屬嚴格忌口，落單前請再向店員確認。`;
-  if (payQuery) return `本店接受 ${(shop.payments || []).join("、")}。實際以收銀台最新告示為準。`;
+  if (payQuery) return `本店接受 ${(shop.payments || []).join("、")}。實際以收銀臺最新告示為準。`;
   if (budgetQuery) return `50 MOP 以內可選：${names(under50)}。`;
   return `店主推介 ${localize(featured?.name, lang)}，MOP ${featured?.price}。${localize(featured?.desc, lang)}`;
 }
@@ -645,7 +645,7 @@ function Footer({ lang, go }) {
 }
 
 export default function App() {
-  // 记住游客的语言选择（刷新/回访不再跳回中文）；存储值不合法时回退 zh
+  // 記住遊客的語言選擇（刷新/回訪不再跳回中文）；存儲值不合法時回退 zh
   const [lang, setLangState] = useState(() => {
     try {
       const stored = window.localStorage.getItem("aoweizhiyi_lang");
@@ -654,7 +654,7 @@ export default function App() {
   });
   const setLang = (code) => {
     setLangState(code);
-    try { window.localStorage.setItem("aoweizhiyi_lang", code); } catch { /* 私隐模式下静默降级 */ }
+    try { window.localStorage.setItem("aoweizhiyi_lang", code); } catch { /* 私隱模式下靜默降級 */ }
   };
   const [view, setView] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -734,7 +734,7 @@ export default function App() {
       {view.name === "home" ? <Home shops={shops} lang={lang} openShop={(shop) => go({ name: "shop", id: shop.id })} onMerchant={() => go({ name: "merchant" })} loading={shopLoad.loading} error={shopLoad.error} onRetry={() => setReloadKey((value) => value + 1)} /> : null}
       {view.name === "shop" && selectedShop ? <ShopView shop={selectedShop} lang={lang} setLang={setLang} go={go} /> : null}
       {view.name === "shop" && !selectedShop ? <main className="shop-detail-state">{detailState.loading ? <><Loader2 className="spin" /><p>正在讀取店舖菜單…</p></> : <><AlertCircle /><p>{detailState.error || "找不到此店舖"}</p><button onClick={() => go({ name: "home" })} type="button">返回首頁</button></>}</main> : null}
-      <Suspense fallback={view.name === "merchant" || view.name === "admin" ? <main className="shop-detail-state"><Loader2 className="spin" /><p>正在載入工作台…</p></main> : null}>
+      <Suspense fallback={view.name === "merchant" || view.name === "admin" ? <main className="shop-detail-state"><Loader2 className="spin" /><p>正在載入工作臺…</p></main> : null}>
         {view.name === "merchant" ? <MerchantStudio lang={lang} onPreview={(id) => go({ name: "shop", id })} /> : null}
         {view.name === "admin" ? <AdminConsole /> : null}
       </Suspense>
