@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.3 seconds
+Output:
 @echo off
 chcp 65001 >nul
 title 澳味智譯 · 本地啓動
@@ -24,6 +27,9 @@ echo  管理端  http://localhost:4173/?page=admin
 echo.
 echo  關閉本窗口即停止服務。
 echo.
+
+rem 啓動參考後端；它會從 .env 讀取 QwenPaw 地址與五個智能體 ID。
+start "澳味智譯後端" /min cmd /c "cd /d %~dp0 && node --env-file-if-exists=.env server/index.js"
 
 rem 2 秒後自動打開瀏覽器（等服務器就緒）
 start "" cmd /c "timeout /t 2 >nul & start http://localhost:4173"
