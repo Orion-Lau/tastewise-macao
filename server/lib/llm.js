@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.3 seconds
-Output:
 // QwenPaw 平臺適配層。業務 Agent 只依賴 invoke()，不直接耦合平臺協議。
 export function createLlm(config) {
   const enabled = Boolean(config?.apiBase);
