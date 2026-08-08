@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.3 seconds
-Output:
 # 澳味智譯 Web（TasteWise Macao）
 
 「澳味智譯」是一個以 LocalBridge 的澳門舊城視覺爲主、吸收 TasteWise 菜單與多語問答能力的可運行 Web 應用。
