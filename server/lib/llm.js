@@ -1,48 +1,72 @@
-// QwenPaw 平臺適配層——全項目唯一與平臺耦合的文件（QWENPAW_PLAN.md §3）。
-// 平臺 API 文檔到手後，只需按實際形態調整 buildRequest / extractText 兩處。
-// 約定：invoke 成功返回模型輸出字符串；任何失敗（未啓用/超時/HTTP 錯/空響應）
-// 一律拋錯，由 agent 的 live 路徑捕獲並降級 runLocal。
-
+Exit code: 0
+Wall time: 0.3 seconds
+Output:
+// QwenPaw 平臺適配層。業務 Agent 只依賴 invoke()，不直接耦合平臺協議。
 export function createLlm(config) {
-  const enabled = Boolean(config?.apiBase && config?.apiKey);
+  const enabled = Boolean(config?.apiBase);
 
-  // 默認按 OpenAI 兼容形態實現（chat/completions，智能體 ID 放 model 字段）。
-  // 若平臺實爲「智能體應用 API」（如 POST {base}/agents/{id}/invoke），改這兩個函數即可。
-  function buildRequest(agentName, { system, user }) {
-    const messages = [];
-    if (system) messages.push({ role: "system", content: system });
-    messages.push({ role: "user", content: user });
+  function buildConsoleRequest(agentName, { system, user }) {
+    const text = system ? `${system}\n\n${user}` : user;
     return {
-      url: `${config.apiBase}/chat/completions`,
-      body: { model: config.agents[agentName] || agentName, messages, stream: false },
+      url: `${config.apiBase}/api/console/chat`,
+      agentId: config.agents[agentName] || agentName,
+      body: {
+        input: [{ role: "user", content: [{ type: "text", text }] }],
+        session_id: `aoweizhiyi-${agentName}-${Date.now()}`,
+        user_id: "aoweizhiyi-server",
+        stream: true,
+      },
     };
   }
 
-  function extractText(data) {
-    const text = data?.choices?.[0]?.message?.content ?? data?.output?.text ?? data?.text;
-    if (typeof text !== "string" || !text.trim()) throw new Error("LLM_EMPTY_RESPONSE");
-    return text;
+  function extractConsoleText(raw) {
+    let answer = "";
+    for (const block of raw.split(/\r?\n\r?\n/)) {
+      const line = block.split(/\r?\n/).find((entry) => entry.startsWith("data:"));
+      if (!line) continue;
+      const payload = line.slice(5).trim();
+      if (!payload || payload === "[DONE]") continue;
+      try {
+        const event = JSON.parse(payload);
+        const finalMessage = Array.isArray(event?.output)
+          ? event.output.findLast((item) => item?.type === "message" && item?.role === "assistant")
+          : null;
+        const candidates = [
+          finalMessage?.content?.[0]?.text,
+          event?.type === "message" && event?.role === "assistant" && event?.status === "completed"
+            ? event?.content?.[0]?.text
+            : null,
+        ];
+        const text = candidates.find((value) => typeof value === "string" && value.trim());
+        if (text) answer = text;
+      } catch {
+        // 心跳或非 JSON SSE 事件不影響最終答案。
+      }
+    }
+    if (!answer.trim()) throw new Error("LLM_EMPTY_RESPONSE");
+    return answer.trim();
   }
 
   return {
     enabled,
     async invoke(agentName, { system, user, timeout = config.timeout } = {}) {
       if (!enabled) throw new Error("LLM_DISABLED");
-      const { url, body } = buildRequest(agentName, { system, user });
+      const { url, agentId, body } = buildConsoleRequest(agentName, { system, user });
+      const headers = { "content-type": "application/json", "x-agent-id": agentId };
+      if (config.apiKey) headers.authorization = `Bearer ${config.apiKey}`;
       const response = await fetch(url, {
         method: "POST",
-        headers: { "content-type": "application/json", authorization: `Bearer ${config.apiKey}` },
+        headers,
         body: JSON.stringify(body),
         signal: AbortSignal.timeout(timeout),
       });
       if (!response.ok) throw new Error(`LLM_HTTP_${response.status}`);
-      return extractText(await response.json());
+      return extractConsoleText(await response.text());
     },
   };
 }
 
-// 提示詞已要求「裸 JSON」，但平臺仍可能包一層 markdown 圍欄；
-// 統一剝掉再解析，解析失敗即拋錯（觸發調用方降級）。
+// 智能體按要求輸出純 JSON；同時兼容模型偶爾附加的 Markdown 代碼圍欄。
 export function parseAgentJson(raw) {
   const text = String(raw).trim().replace(/^```[a-z]*\s*/i, "").replace(/```\s*$/, "");
   return JSON.parse(text);
