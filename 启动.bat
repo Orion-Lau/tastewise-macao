@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.3 seconds
-Output:
 @echo off
 chcp 65001 >nul
 title 澳味智譯 · 本地啓動
